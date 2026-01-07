@@ -5,6 +5,7 @@ from google.adk.tools import google_search
 from google.genai import types # Para criar conteúdos (Content e Part)
 
 # Importações para Google Sheets
+gemini_model = "gemini-2.5-flash"
 
 # Função auxiliar que envia uma mensagem para um agente via Runner e retorna a resposta final
 def call_agent(agent: Agent, message_text: str) -> str:
@@ -30,7 +31,7 @@ def call_agent(agent: Agent, message_text: str) -> str:
 def agente_sugestor(topico):
   buscador = Agent(
     name="agente_sugestor",
-    model="gemini-2.5-flash-preview-05-20",
+    model=gemini_model,
     description="Agente que analisa a patente de usuário e as patentes existentes para sugerir inovações que podem ser patenteadas",
     tools=[google_search],
     instruction="""
@@ -38,7 +39,7 @@ def agente_sugestor(topico):
     e de um conjunto de patentes similares, seu objetivo é gerar duas categorias de sugestões:
     
 
-    1. dentificar áreas de melhoria: Analisar a patente do usuário em busca de pontos fracos, 
+    1. Identificar áreas de melhoria: Analisar a patente do usuário em busca de pontos fracos, 
     limitações ou funcionalidades que poderiam ser aprimoradas.
     
     2. Aprimoramentos patenteáveis: Inovações específicas que podem ser incorporadas à patente do usuário, 
@@ -60,7 +61,7 @@ def agente_sugestor(topico):
 def agente_gerador_de_relatorio(topico):
   agente = Agent(
     name="agente_gerador_de_relatorio",
-    model="gemini-2.5-flash-preview-05-20",
+    model=gemini_model,
     description="Agente que irá gerara um relatório pa partir da descrição da patente no formato no INPI",
     tools=[google_search],
     instruction="""
@@ -153,7 +154,7 @@ def agente_gerador_de_relatorio(topico):
 def agente_buscador_de_PI(topico):
   buscador = Agent(
     name="agente_buscador_de_PI",
-    model="gemini-2.5-flash-preview-05-20",
+    model=gemini_model,
     description="Agente responsável por investigar a existência de propriedade intelectual semelhante à ideia proposta pelo usuário.",
     tools=[google_search],
     instruction="""
@@ -226,7 +227,7 @@ def agente_buscador_de_PI(topico):
 def agente_revisor(topico):
   agente = Agent(
     name="agente_revisor",
-    model="gemini-2.5-flash-preview-05-20",
+    model=gemini_model,
     description="Agente responsável por revisar a busca realizada por outro agente, garantindo a precisão e completude das informações.",
     tools=[google_search],
     instruction="""
@@ -271,7 +272,7 @@ def agente_revisor(topico):
 def agente_recomendador(topico):
   agente = Agent(
     name="agente_recomendador",
-    model="gemini-2.5-flash-preview-05-20",
+    model=gemini_model,
     description="Agente que analisa o formulário preenchido pelo usuário e faz uma recomendação de como proceder",
     tools=[google_search],
     instruction="""
@@ -308,7 +309,7 @@ def agente_recomendador(topico):
 def agente_avaliador(topico):
   agente = Agent(
     name="agente_recomendador",
-    model="gemini-2.5-flash-preview-05-20",
+    model=gemini_model,
     description="Agente responsável por avaliar o potencial da ideia com base nas respostas do usuário e nas análises realizadas por outros agentes.",
     tools=[google_search],
     instruction="""
@@ -352,7 +353,7 @@ def agente_avaliador(topico):
 def agente_analista(topico):
   agente = Agent(
     name="agente_analista",
-    model="gemini-2.5-flash-preview-05-20",
+    model=gemini_model,
     description="Agente que analisa a lista de propriedades intelectuais e as recomendações feitas pelos outros agentes para fazer uma conclusão final",
     tools=[google_search],
     instruction="""
@@ -385,7 +386,7 @@ def agente_analista(topico):
 def agente_de_próximos_passos(topico):
   agente = Agent(
     name="agente_de_próximos_passos",
-    model="gemini-2.5-flash-preview-05-20",
+    model=gemini_model,
     description="Orienta os próximos passos para proteger sua Propriedade Intelectual com base nas suas escolhas.",
     tools=[google_search],
     instruction="""
@@ -408,7 +409,7 @@ def agente_de_próximos_passos(topico):
 def agente_pesquisa_pdi_aneel(topico):    
   agente = Agent(
         name="agente_pesquisa_pdi_aneel",
-        model="gemini-2.5-flash-preview-05-20", # Mantendo o mesmo modelo do seu exemplo
+        model=gemini_model, # Mantendo o mesmo modelo do seu exemplo
         description="Agente especializado em pesquisar e identificar projetos de Pesquisa, Desenvolvimento e Inovação (PDI) regulados ou financiados pela ANEEL, com base em um tópico de interesse.",
         tools=[google_search], # Usaremos Google Search para rastrear diversas fontes
         instruction="""
@@ -449,7 +450,7 @@ def agente_pesquisa_pdi_aneel(topico):
 def agente_sugestor_de_projetos(topico):
     agente = Agent(
         name="agente_sugestor_de_projetos",
-        model="gemini-2.5-flash-preview-05-20",
+        model=gemini_model,
         description="Agente que sugere projetos de PDI da ANEEL com base no tópico e análise fornecida.",
         tools=[google_search],
         instruction="""
